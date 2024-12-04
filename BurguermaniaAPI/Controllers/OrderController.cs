@@ -30,7 +30,7 @@ namespace BurguermaniaAPI.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/Orders/5
+        // GET: api/Orders/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
@@ -50,15 +50,28 @@ namespace BurguermaniaAPI.Controllers
 
         // POST: api/Orders
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Order>> PostOrder([FromBody] Order order)
         {
+            if (order == null)
+            {
+                return BadRequest("Order is null.");
+            }
+
+            // Validar o modelo
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Adicionar o pedido ao contexto
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
+            // Retornar o pedido criado com o status 201 Created
             return CreatedAtAction(nameof(GetOrder), new { id = order.Id }, order);
         }
 
-        // PUT: api/Orders/5
+        // PUT: api/Orders/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrder(int id, Order order)
         {
@@ -88,7 +101,7 @@ namespace BurguermaniaAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Orders/5
+        // DELETE: api/Orders/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {

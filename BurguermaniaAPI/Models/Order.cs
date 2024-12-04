@@ -9,7 +9,7 @@ namespace BurguermaniaAPI.Models
         public Status Status { get; set; }
         public float Value { get; set; }
 
-        public List<OrderProduct> OrderProducts { get; set; }
-        public List<UserOrder> UserOrders { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+        public List<UserOrder> UserOrders { get; set; } = new List<UserOrder>();
     }
 }

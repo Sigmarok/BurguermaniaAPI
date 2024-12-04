@@ -39,7 +39,7 @@ namespace BurguermaniaAPI.Controllers
         }
 
         // GET: api/Products/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await _context.Products
@@ -55,21 +55,30 @@ namespace BurguermaniaAPI.Controllers
             return product;
         }
 
-        // GET: api/Products/name
-        [HttpGet("{name}")]
-        public async Task<ActionResult<Product>> GetProduct(string name)
+        // GET: api/Products/name/{name?}
+        [HttpGet("name/{name?}")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProductByName(string name)
         {
-            var product = await _context.Products
+            if (string.IsNullOrEmpty(name))
+            {
+                return await _context.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.OrderProducts)
+                    .ToListAsync();
+            }
+
+            var products = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.OrderProducts)
-                .FirstOrDefaultAsync(p => p.Name == name);
+                .Where(p => p.Name.Contains(name))
+                .ToListAsync();
 
-            if (product == null)
+            if (products == null || !products.Any())
             {
                 return NotFound();
             }
 
-            return product;
+            return Ok(products);
         }
 
         // POST: api/Products
