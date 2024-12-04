@@ -23,10 +23,19 @@ namespace BurguermaniaAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.OrderProducts)
-                .ToListAsync();
+            try
+            {
+                return await _context.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.OrderProducts)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (use a logging framework like Serilog, NLog, etc.)
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         // GET: api/Products/5
@@ -37,6 +46,23 @@ namespace BurguermaniaAPI.Controllers
                 .Include(p => p.Category)
                 .Include(p => p.OrderProducts)
                 .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return product;
+        }
+
+        // GET: api/Products/name
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Product>> GetProduct(string name)
+        {
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.OrderProducts)
+                .FirstOrDefaultAsync(p => p.Name == name);
 
             if (product == null)
             {

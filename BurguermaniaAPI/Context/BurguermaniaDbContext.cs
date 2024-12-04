@@ -149,6 +149,37 @@ namespace BurguermaniaAPI.Data
             Full_Description = "Inspirado no churrasco americano, este hambúrguer é uma celebração de sabores. O hambúrguer de costela desfiada é macio e bem temperado, enquanto o coleslaw traz frescor e crocância. O cheddar derretido e o bacon crocante adicionam camadas extras de sabor, resultando em uma experiência única e marcante.",
             CategoryId = 3
         }
+
+    );
+    modelBuilder.Entity<Status>().HasData(
+        new Status
+        {
+            Id = 1,
+            Name = "Pendente"
+            
+        },
+
+        new Status
+        {
+            Id = 2,
+            Name = "Confirmado"
+            
+        },
+
+        new Status
+        {
+            Id = 3,
+            Name = "Em preparo"
+            
+        },
+
+        new Status
+        {
+            Id = 4,
+            Name = "A caminho do cliente"
+            
+        }
+
     );
         }
     }

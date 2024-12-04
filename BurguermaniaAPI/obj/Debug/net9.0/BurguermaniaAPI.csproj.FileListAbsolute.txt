@@ -247,3 +247,4 @@ C:\Users\silas\OneDrive\Documentos\GitHub\BurguermaniaAPI\BurguermaniaAPI\obj\De
 C:\Users\silas\OneDrive\Documentos\GitHub\BurguermaniaAPI\BurguermaniaAPI\obj\Debug\net9.0\BurguermaniaAPI.pdb
 C:\Users\silas\OneDrive\Documentos\GitHub\BurguermaniaAPI\BurguermaniaAPI\obj\Debug\net9.0\BurguermaniaAPI.genruntimeconfig.cache
 C:\Users\silas\OneDrive\Documentos\GitHub\BurguermaniaAPI\BurguermaniaAPI\obj\Debug\net9.0\ref\BurguermaniaAPI.dll
+C:\Users\silas\OneDrive\Documentos\GitHub\BurguermaniaAPI\BurguermaniaAPI\obj\Debug\net9.0\BurguermaniaAPI.sourcelink.json

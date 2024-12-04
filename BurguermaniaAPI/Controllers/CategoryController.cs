@@ -26,11 +26,11 @@ namespace BurguermaniaAPI.Controllers
             return await _context.Categories.Include(c => c.Products).ToListAsync();
         }
 
-        // GET: api/Categories/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        // GET: api/Categories/name
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Category>> GetCategory(string name)
         {
-            var category = await _context.Categories.Include(c => c.Products).FirstOrDefaultAsync(c => c.Id == id);
+            var category = await _context.Categories.Include(c => c.Products).FirstOrDefaultAsync(c => c.Name == name);
 
             if (category == null)
             {
